@@ -1,0 +1,49 @@
+pipeline{
+    agent any
+    environment {
+        DIRECTORY_PATH= "https://github.com/Roomnumber13/Deakin-Unit-Page.git"
+        TESTING_ENVIRONMENT= "Stranger Things"
+        PRODUCTION_ENVIRONMENT= "Rajkumar Rajendran"
+    }
+    stages{
+        stage("Build"){
+            steps{
+                echo "fetch the source code from the $DIRECTORY_PATH specified by the environment variable"
+                echo "compile code and generate any necessary artifacts"
+            }
+            post{
+                success{
+                    mail to: "rajkumar.rajendran197@gmail.com",
+                    subject: "Build Status Email",
+                    body: "Build was successful!"
+                }
+            }
+        }
+        stage("Test"){
+            steps{
+                echo "unit tests"
+                echo "integration tests"
+            }
+        }
+        stage("Code Quality Check"){
+            steps{
+                echo "Check the quality of the code"
+            }
+        }
+        stage("Deploy"){
+            steps{
+                echo "deploy the application to a testing environment specified by the environment variable"
+            }
+        }
+        stage("Approval"){
+            steps{
+                sleep 10
+            }
+        }
+        stage("Deploy to Production"){
+            steps{
+                echo "code successfully deployed in $PRODUCTION_ENVIRONMENT"
+            }
+        }
+    }
+}
