@@ -42,7 +42,7 @@ pipeline{
         }
         stage("Deploy to Production"){
             steps{
-                echo "code successfully deployed in $PRODUCTION_ENVIRONMENT"
+                echo "code is successfully deployed in $PRODUCTION_ENVIRONMENT"
             }
         }
     }
