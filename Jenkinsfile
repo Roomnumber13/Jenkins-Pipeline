@@ -1,5 +1,3 @@
-@Library('email-ext') _
-
 pipeline {
     agent any
     environment {
