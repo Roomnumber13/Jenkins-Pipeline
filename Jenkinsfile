@@ -49,19 +49,26 @@ pipeline {
             }
         }
         stage('Security Scan') {
-            steps {
-                echo 'Performing security scan with OWASP ZAP....'
-            }
-            post {
-                always {
-                    emailext attachmentsPattern: '**/*.log', // Pattern to match log files
-                    attachLog: true, // Attach build log
-                    body: 'Build ${currentBuild.currentResult}: Check attached log files for details', // Email body
-                    subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})", // Email subject
-                    to: 'rajkumar.rajendran197@gmail.com' // Recipient email address
-                }
-            }
+    steps {
+        echo 'Performing security scan with OWASP ZAP....'
+    }
+    post {
+        always {
+            emailext (
+                subject: "${it.name} Stage Failed: ${currentBuild.currentResult}",
+                body: """
+                ${it.name} Stage Status: ${currentBuild.currentResult}
+
+                Jenkins URL: ${env.BUILD_URL}
+
+                Build Number: ${env.BUILD_NUMBER}
+                """,
+                attachLog: true,
+                to: 'rajkumar.rajendran197@gmail.com'
+            )
         }
+    }
+}
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying the application to staging server using AWS CodeDeploy...'
