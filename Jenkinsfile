@@ -52,7 +52,7 @@ pipeline {
       steps {
         echo 'Performing security scan with OWASP ZAP....'
         emailext (
-          subject: "§{it.name) Stage Failed: ${currentBuild.currentResult)}",
+          subject: "§{it.name) Stage Failed: ${currentBuild.currentResult}",
           body: """
           §{it. name} Stage Status: ${currentBuild. currentResult}
           Jenkins URL: #{env. BUILD_URL}
