@@ -50,7 +50,7 @@ pipeline {
     }
     stage('Security Scan') {
       steps {
-        echo 'Performing security scan with OWASP ZAP...'
+        echo 'Performing security scan with OWASP ZAP....'
         emailext attachLog: true, body: 'Scan Successful', subject: 'Security Check', to: 'rajkumar.rajendran197@gmail.com'
       }
       post {
