@@ -64,7 +64,7 @@ pipeline {
       }
       post {
         always {
-          emailext attachmentsPattern: '**/*.log', // Pattern to match log files
+            emailext attachmentsPattern: '**/*.log', // Pattern to match log files
                      attachLog: true, // Attach build log
                      body: 'Build ${currentBuild.currentResult}: Check attached log files for details', // Email body
                      subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})" // Email subject
