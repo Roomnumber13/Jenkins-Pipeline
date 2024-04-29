@@ -53,7 +53,7 @@ pipeline {
         echo 'Performing security scan with OWASP ZAP....'
     }
     post {
-        always {
+        success {
             emailext (
                 subject: "${env.STAGE_NAME} Stage Failed: ${currentBuild.currentResult}",
                 body: """
