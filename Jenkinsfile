@@ -63,10 +63,12 @@ pipeline {
           )
       }
       post {
-        success {
-          mail to: "rajkumar.rajendran197@gmail.com",
-            subject: "Security Scan Status Email",
-            body: "Security scan was successful!"
+        always {
+          emailext attachmentsPattern: '**/*.log', // Pattern to match log files
+                     attachLog: true, // Attach build log
+                     body: 'Build ${currentBuild.currentResult}: Check attached log files for details', // Email body
+                     subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME}' (${env.BUILD_NUMBER})" // Email subject
+                     to: 'rajkumar.rajendran197@gmail.com' // Recipient email address
         }
       }
     }
