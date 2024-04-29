@@ -55,9 +55,9 @@ pipeline {
     post {
         always {
             emailext (
-                subject: "${it.name} Stage Failed: ${currentBuild.currentResult}",
+                subject: "${env.STAGE_NAME} Stage Failed: ${currentBuild.currentResult}",
                 body: """
-                ${it.name} Stage Status: ${currentBuild.currentResult}
+                ${env.STAGE_NAME} Stage Status: ${currentBuild.currentResult}
 
                 Jenkins URL: ${env.BUILD_URL}
 
