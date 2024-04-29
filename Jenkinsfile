@@ -55,7 +55,7 @@ pipeline {
             post {
                 success {
                     emailext (
-                        subject: "${env.STAGE_NAME} Stage Failed: ${currentBuild.currentResult}",
+                        subject: "${env.STAGE_NAME} Stage Success: ${currentBuild.currentResult}",
                         body: """
                         ${env.STAGE_NAME} Stage Status: ${currentBuild.currentResult}
                         
