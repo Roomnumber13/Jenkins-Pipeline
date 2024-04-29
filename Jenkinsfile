@@ -1,3 +1,5 @@
+@Library('email-ext') _
+
 pipeline {
     agent any
     environment {
@@ -37,9 +39,12 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "rajkumar.rajendran197@gmail.com",
-                    subject: "Unit & Integration Test Status Email",
-                    body: "Test was successful!"
+                    emailext (
+                        subject: "Unit & Integration Test Status: Success",
+                        body: "Unit & Integration tests were successful.",
+                        attachLog: true,
+                        to: 'rajkumar.rajendran197@gmail.com'
+                    )
                 }
             }
         }
@@ -49,15 +54,18 @@ pipeline {
             }
         }
         stage('Security Scan') {
-    steps {
-        echo 'Performing security scan with OWASP ZAP....'
+            steps {
+                echo 'Performing security scan with OWASP ZAP....'
+            }
+        }
     }
+
     post {
         success {
             emailext (
-                subject: "${env.STAGE_NAME} Stage Failed: ${currentBuild.currentResult}",
+                subject: "Security Scan Status: ${currentBuild.currentResult}",
                 body: """
-                ${env.STAGE_NAME} Stage Status: ${currentBuild.currentResult}
+                Security Scan Status: ${currentBuild.currentResult}
 
                 Jenkins URL: ${env.BUILD_URL}
 
@@ -68,21 +76,20 @@ pipeline {
             )
         }
     }
-}
-        stage('Deploy to Staging') {
-            steps {
-                echo 'Deploying the application to staging server using AWS CodeDeploy...'
-            }
+
+    stage('Deploy to Staging') {
+        steps {
+            echo 'Deploying the application to staging server using AWS CodeDeploy...'
         }
-        stage('Integration Tests on Staging') {
-            steps {
-                echo 'Running integration tests on staging environment..'
-            }
+    }
+    stage('Integration Tests on Staging') {
+        steps {
+            echo 'Running integration tests on staging environment..'
         }
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploying the application to production server using AWS CodeDeploy...'
-            }
+    }
+    stage('Deploy to Production') {
+        steps {
+            echo 'Deploying the application to production server using AWS CodeDeploy...'
         }
     }
 }
