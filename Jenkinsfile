@@ -33,7 +33,7 @@ pipeline {
     stage('Unit and Integration Tests') {
       steps {
         echo 'Running unit tests with JUnit...'
-        echo 'Running integration tests with Selenium....'
+        echo 'Running integration tests with Selenium...'
       }
       post {
         success {
@@ -63,7 +63,7 @@ pipeline {
     }
     stage('Deploy to Staging') {
       steps {
-        echo 'Deploying the application to staging server using AWS CodeDeploy....'
+        echo 'Deploying the application to staging server using AWS CodeDeploy...'
       }
     }
     stage('Integration Tests on Staging') {
