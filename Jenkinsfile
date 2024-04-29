@@ -51,7 +51,16 @@ pipeline {
     stage('Security Scan') {
       steps {
         echo 'Performing security scan with OWASP ZAP....'
-        emailext attachLog: true, body: 'Scan Successful', subject: 'Security Check', to: 'rajkumar.rajendran197@gmail.com'
+        emailext (
+          subject: "§{it.name) Stage Failed: ${currentBuild.currentResult)}",
+          body: """
+          §{it. name} Stage Status: ${currentBuild. currentResult}
+          Jenkins URL: #{env. BUILD_URL}
+          Build Number: #(env. BUILD_NUMBER}
+          """,
+          attachLog: true,
+          to: 'rajkumar.rajendran197@gmail.com'
+          )
       }
       post {
         success {
