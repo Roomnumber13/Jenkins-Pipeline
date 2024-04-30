@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Code Analysis') {
             steps {
-                echo 'Integrating SonarQube for code analysis with Jenkins...'
+                echo 'Integrating SonarQube for code analysis with Jenkins....'
             }
         }
         stage('Security Scan') {
