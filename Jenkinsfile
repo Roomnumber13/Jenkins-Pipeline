@@ -53,6 +53,11 @@ pipeline {
                 echo 'Performing security scan with OWASP ZAP....'
             }
             post {
+              success {
+                    mail to: "rajkumar.rajendran197@gmail.com",
+                    subject: "Security Scan Status Email",
+                    body: "Security scan was successful!"
+                }
                 always {
                     emailext attachmentsPattern: '**/*.log', // Pattern to match log files
                     attachLog: true, // Attach build log
