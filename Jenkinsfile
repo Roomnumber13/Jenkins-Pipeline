@@ -36,20 +36,20 @@ pipeline {
                 echo 'Running integration tests with Selenium....'
             }
             post {
-        success {
-            // Send email notification on successful pipeline completion
-            emailext(to: "rajkumar.rajendran197@gmail.com",
-            subject: "Successful pipeline",
-            body: "Unit & Integration is successful!",
-            attachLog: true)
-        }
-        failure {
-            // Send email notification on pipeline failure
-            emailext(to: "rajkumar.rajendran197@gmail.com",
-            subject: "Failed pipeline",
-            body: "The test has failed. Please check!",
-            attachLog: true)
-        }
+                success {
+                    // Send email notification on successful pipeline completion
+                    emailext(to: "rajkumar.rajendran197@gmail.com",
+                             subject: "Successful pipeline",
+                             body: "Unit & Integration is successful!",
+                             attachLog: true)
+                }
+                failure {
+                    // Send email notification on pipeline failure
+                    emailext(to: "rajkumar.rajendran197@gmail.com",
+                             subject: "Failed pipeline",
+                             body: "The test has failed. Please check!",
+                             attachLog: true)
+                }
             }
         }
         stage('Code Analysis') {
@@ -62,20 +62,21 @@ pipeline {
                 echo 'Performing security scan with OWASP ZAP....'
             }
             post {
-        success {
-            // Send email notification on successful pipeline completion
-            emailext(to: "rajkumar.rajendran197@gmail.com",
-            subject: "Successful pipeline",
-            body: "The security scan is successful!",
-            attachLog: true)
-        }
-        failure {
-            // Send email notification on pipeline failure
-            emailext(to: "rajkumar.rajendran197@gmail.com",
-            subject: "Failed pipeline",
-            body: "The security scan has failed. Please check!",
-            attachLog: true)
-        }
+                success {
+                    // Send email notification on successful pipeline completion
+                    emailext(to: "rajkumar.rajendran197@gmail.com",
+                             subject: "Successful pipeline",
+                             body: "The security scan is successful!",
+                             attachLog: true)
+                }
+                failure {
+                    // Send email notification on pipeline failure
+                    emailext(to: "rajkumar.rajendran197@gmail.com",
+                             subject: "Failed pipeline",
+                             body: "The security scan has failed. Please check!",
+                             attachLog: true)
+                }
+            }
         }
         stage('Deploy to Staging') {
             steps {
