@@ -33,7 +33,7 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Running unit tests with JUnit...'
-                echo 'Running integration tests with Selenium....'
+                echo 'Running integration tests with Selenium...'
             }
             post {
                 success {
@@ -54,7 +54,7 @@ pipeline {
         }
         stage('Code Analysis') {
             steps {
-                echo 'Integrating SonarQube for code analysis with Jenkins....'
+                echo 'Integrating SonarQube for code analysis with Jenkins...'
             }
         }
         stage('Security Scan') {
